@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dark_gray">#333333</color>
+
+    <!--placeholder threshold until medically correct values are determined-->
+    <color name="gray">#9a9a9a</color>
+    <!--0 to 20--> <color name="red">#e93f3c</color>
+    <!--20 to 40--> <color name="orange">#ffa500</color>
+    <!--40 to 60--> <color name="yellow">#ffff00</color>
+    <!--60 to 80--> <color name="yellow_green">#9acd32</color>
+    <!--80 to 100--> <color name="green">#33a532</color>
+</resources>

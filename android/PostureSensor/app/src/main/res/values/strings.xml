@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Posture Sensor</string>
+    <string name="slouch">Slouch</string>
+    <string name="lean">Lean</string>
+    <string name="left_skew">Left Skew</string>
+    <string name="right_skew">Right Skew</string>
+    <string name="no_value">---</string>
+</resources>
