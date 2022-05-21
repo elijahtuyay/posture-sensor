@@ -13,7 +13,7 @@
 const char* apiKey = "apiWrite";       //API WRITE KEY
 const char* ssid = "ssid";             //WIFI SSID
 const char* password = "password";     //WIFI PASSOWRD
-const unsigned long chanNum = 1668203;
+const unsigned long chanNum = 1234567; // place older channel number
  
 WiFiClient client;
 
