@@ -2,9 +2,7 @@
 #include <NewPingESP8266.h>
 #include <Wire.h>
 #include <Adafruit_ADS1X15.h>
-//#include <WiFi.h>
 #include <ESP8266WiFi.h>
-//#include <ArduinoSort.h>
 #include "QuickMedianLib.h"
 #include "ThingSpeak.h"
 
@@ -12,8 +10,8 @@
 //WIFI CONNECTION (placeholders)
 const char* apiKey = "apiWrite";       //API WRITE KEY
 const char* ssid = "ssid";             //WIFI SSID
-const char* password = "password";     //WIFI PASSOWRD
-const unsigned long chanNum = 1234567; // placeholder channel number
+const char* password = "password";     //WIFI PASSWORD
+const unsigned long chanNum = 1668203;
  
 WiFiClient client;
 
@@ -56,24 +54,14 @@ FuzzySet *fsr_moderate = new FuzzySet(30,40,55,65);
 FuzzySet *fsr_strong = new FuzzySet(55,65,90,90);
 
 //Output 1a: slouch forward
-FuzzySet *slouch_hi = new FuzzySet(0,30,30,30);
+FuzzySet *slouch_hi = new FuzzySet(0,0,10,40);
 FuzzySet *slouch_med = new FuzzySet(20,50,50,80);
-FuzzySet *slouch_low = new FuzzySet(70,100,100,100);
+FuzzySet *slouch_low = new FuzzySet(60,90,100,100);
 
 //Output 2a: lean back
 FuzzySet *lean_hi = new FuzzySet(0,30,30,30);
 FuzzySet *lean_med = new FuzzySet(20,50,50,80);
 FuzzySet *lean_low = new FuzzySet(70,100,100,100);
-
-//Input 3b: fsr asymmetry
-FuzzySet *fsr_low = new FuzzySet(0,0,0,0);
-FuzzySet *fsr_med = new FuzzySet(0,0,0,0);
-FuzzySet *fsr_hi = new FuzzySet(0,0,0,0);
-
-//Output 3: overall posture
-FuzzySet *posture_low = new FuzzySet(0,0,0,0);
-FuzzySet *posture_med = new FuzzySet(0,0,0,0);
-FuzzySet *posture_hi = new FuzzySet(0,0,0,0);
 
 void setup(void)
 {
@@ -255,19 +243,12 @@ void loop(void)
   fsr2 = map(adc1, 0, 1640, 0, 100);
   flex1 = map(adc2, 20, 80, 0, 100);
   flex2 = map(adc3, 25, 85, 0, 100);
-  //ultra = map(Dcm, 0, 80, 0, 100);
 
   fsr1_A[i] = fsr1;
   fsr2_A[i] = fsr2;
   flex1_A[i] = flex1;
   flex2_A[i] = flex2;
   ultra_A[i] = Dcm;
-  
-  //Serial.print("LEFT: "); Serial.print(fsr1); Serial.print(", ");
-  //Serial.print("RIGHT: "); Serial.print(fsr2); Serial.print(", ");
-  //Serial.print("UP: "); Serial.print(flex1); Serial.print(", ");
-  //Serial.print("DOWN: "); Serial.print(flex2); Serial.print(", ");
-  //Serial.print("DISTANCE: "); Serial.print(Dcm); Serial.println("");
   
   i++;
 
@@ -319,24 +300,6 @@ void loop(void)
 
     posture_final = (min(slouch_final, lean_final) + min(skew_L_final, skew_R_final)) / 2;
 
-    /*
-    Serial.println("");
-    Serial.print("Slouch: "); Serial.println(slouch_final);
-    Serial.print(" | Lean: "); Serial.print(lean_final);
-    Serial.println("");
-    Serial.print(" | Left Skew: "); Serial.print(skew_L_final);
-    Serial.print(" | Right Skew: "); Serial.print(skew_R_final);
-    Serial.print(" | Right Skew: "); Serial.print(posture_final);
-    Serial.println("");
-
-    Serial.write('0');
-    Serial.write(int(slouch_final));
-    Serial.write(int(lean_final));
-    Serial.write(int(skew_L_final));
-    Serial.write(int(skew_R_final));
-    Serial.write(int(posture_final));
-    */
-    
     //reconnect if connection is lost
     if(WiFi.status() != WL_CONNECTED)
     {
